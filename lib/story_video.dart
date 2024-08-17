@@ -110,7 +110,7 @@ class _StoryVideoState extends State<StoryVideo> {
       return Center(
         child: AspectRatio(
           aspectRatio: widget.videoPlayerController.value.aspectRatio,
-          child: CachedVideoPlayerPlusController(
+          child: CachedVideoPlayerPlus(
             widget.videoPlayerController,
             key: ValueKey(widget.path),
           ),

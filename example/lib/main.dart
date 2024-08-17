@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:story/story.dart';
-import 'package:story/story_image.dart';
-import 'package:story/story_page_view.dart';
-import 'package:story/story_video.dart';
 
 void main() {
   runApp(const MyApp());
