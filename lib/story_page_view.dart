@@ -438,6 +438,7 @@ class _StoryPageBuilderState extends State<_StoryPageBuilder>
           indicatorAnimationController: widget.indicatorAnimationController,
         ),
         _Gestures(
+          indicatorDuration: widget.indicatorDuration,
           animationController: animationController,
         ),
         Positioned.fill(
@@ -460,9 +461,11 @@ class _Gestures extends StatelessWidget {
   const _Gestures({
     Key? key,
     required this.animationController,
+    required this.indicatorDuration,
   }) : super(key: key);
 
   final AnimationController? animationController;
+  final Duration indicatorDuration;
 
   @override
   Widget build(BuildContext context) {
@@ -473,6 +476,7 @@ class _Gestures extends StatelessWidget {
             color: Colors.transparent,
             child: GestureDetector(
               onTap: () {
+                animationController!.duration = indicatorDuration;
                 animationController!.forward(from: 0);
                 context.read<_StoryStackController>().decrement();
               },
@@ -512,8 +516,10 @@ class _Gestures extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 context.read<_StoryStackController>().increment(
-                      restartAnimation: () =>
-                          animationController!.forward(from: 0),
+                      restartAnimation: () {
+                        animationController!.duration = indicatorDuration;
+                        animationController!.forward(from: 0);
+                      },
                       completeAnimation: () => animationController!.value = 1,
                     );
               },
